@@ -1,10 +1,10 @@
 import React from 'react';
-import './navbar.style.scss'
+import styles from './navbar.module.scss'
 
 const Navbar = () => {
     return (
-        <div className='navbar'>
-            <div className='app-title'>
+        <div className={styles['navbar']}>
+            <div className={styles['app-title']}>
                 <h5>Admin Panel</h5>
             </div>
         </div>
