@@ -3,15 +3,23 @@ import styles from './dashboardStaff.module.scss';
 
 import CardContainerStaff from '../../components/cardContainerStaff/cardContainerStaff';
 import TabOption from '../../components/tabOption/tabOption';
+import SmallContainerStaff from '../../components/smallContainerStaff/smallContainerStaff';
+import StaffDataContainer from '../../components/staffDataContainer/staffDataContainer';
+import MapboxGLMap from '../../components/map/map';
+
+import { MyResponsivePie } from '../../components/staffDataContainer/staffDataContainer';
+import { ChartData } from '../../components/staffDataContainer/data';
 
 
 const renderLaptopVersion = () => {
 
     return (
         <div className={styles['main-container']}>
+            <StaffDataContainer/>
             <CardContainerStaff title={'Pending'} />
-            <CardContainerStaff title={'In Progress'} />
-            <CardContainerStaff title={'Fixed'} />
+            <SmallContainerStaff/>
+            {/* <CardContainerStaff title={'In Progress'} />
+            <CardContainerStaff title={'Fixed'} /> */}
         </div>
     );
 }
@@ -23,11 +31,33 @@ const renderMobileVersion = (currentTab, setCurrentTab) => {
     if(currentTab === 'pending'){
         container = <CardContainerStaff title={'Pending'}/>;
     }
-    else if(currentTab === 'fixed'){
-        container = <CardContainerStaff title={'Fixed'}/>;
-    }
-    else{
+    else if(currentTab === 'inprogress'){
         container = <CardContainerStaff title={'In Progress'}/>;
+    }
+    else if(currentTab === 'map'){
+        container = (<div className={styles['mobile-map-container']}>
+            <div className={styles['title']}>
+                Map
+            </div>
+            <div  className={styles['body']}>
+                <MapboxGLMap locationArray={[
+                    {
+                        lat:'15.24',
+                        long:'74.25',
+                    }
+                ]}/>
+            </div>
+        </div>);
+    }
+    else if(currentTab === 'chart'){
+        container = (<div className={styles['mobile-chart-container']}>
+            <div className={styles['title']}>
+                    Insights
+            </div>
+            <div className={styles['body']}>
+                <MyResponsivePie data={ChartData}/>
+            </div>
+        </div>);
     }
 
     return (
@@ -39,8 +69,11 @@ const renderMobileVersion = (currentTab, setCurrentTab) => {
                 <div className={styles['option']} onClick={()=>{setCurrentTab('inprogress')}}>
                      <TabOption text={'In Progress'} selected={currentTab==='inprogress'} />
                 </div>
-                <div className={styles['option']} onClick={()=>{setCurrentTab('fixed')}}>
-                     <TabOption text={'Fixed'} selected={currentTab==='fixed'} />
+                <div className={styles['option']} onClick={()=>{setCurrentTab('chart')}}>
+                     <TabOption text={'Insights'} selected={currentTab==='chart'} />
+                </div>
+                <div className={styles['option']} onClick={()=>{setCurrentTab('map')}}>
+                     <TabOption text={'map'} selected={currentTab==='map'} />
                 </div>
             </div>
             {

@@ -11,7 +11,6 @@ import MapboxGLMap from '../map/map';
 const StaffComplaintDetails = () => {
 
 
-
     return (
         <div className={styles['page']}>
             <div className={styles['grid-container']}>
@@ -31,7 +30,12 @@ const StaffComplaintDetails = () => {
                 </div>
                 <div className={styles['map']}>
                     <div style={{ height: '100%', width: '100%' }}>
-                       <MapboxGLMap lat={15.2993} long={74.1240}/>
+                       <MapboxGLMap locationArray={[
+                           {
+                                lat:15.1890,
+                                long:74.0124
+                            },
+                       ]}/>
                     </div>
                 </div>
             </div>
@@ -40,3 +44,4 @@ const StaffComplaintDetails = () => {
 }
 
 export default StaffComplaintDetails;
+

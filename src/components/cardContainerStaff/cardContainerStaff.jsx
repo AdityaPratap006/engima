@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import styles from './cardContainerStaff.module.scss';
-import ComplainCard from '../complainCard/complainCard';
+
+
+const ComplainCard = React.lazy(() => import('../complainCard/complainCard'));
+
 
 const CardContainerStaff = ({title}) => {
     return (
@@ -10,7 +13,11 @@ const CardContainerStaff = ({title}) => {
             </div>
             <div className={styles['body']}>
                 {
-                   [1,2,3,4,5,6,7,8].map( i => <ComplainCard key={i} id={i}/>)
+                   [...new Array(100)].map( i => (
+                       <Suspense fallback={<div>Loading....</div>}>
+                           <ComplainCard key={i} id={i}/>
+                       </Suspense>
+                   ))
                 }
             </div>
         </div>

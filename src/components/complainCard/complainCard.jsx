@@ -6,7 +6,7 @@ import { Link, useRouteMatch } from 'react-router-dom';
 import { ReactComponent as OptionsIcon } from '../../assets/ellipsis-h-solid.svg';
 import potholeImg from '../../assets/pothole-img.jpg';
 
-const ComplainCard = ({id}) => {
+const ComplainCard = ({id, small}) => {
 
     const [menuOpen, setMenuOpen] = useState(false);
 
@@ -51,7 +51,7 @@ const ComplainCard = ({id}) => {
 
     const match = useRouteMatch();
     return (
-        <div  className={styles['card']}>
+        <div  className={`${styles['card']} ${small?styles['small']:''}`}>
             <div  ref={exceptionRef} className={styles['options-menu']} style={{
                 display: menuOpen ? 'flex' : 'none',
             }}>
