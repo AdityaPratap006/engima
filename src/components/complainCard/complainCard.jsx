@@ -5,16 +5,18 @@ import { Link, useRouteMatch } from 'react-router-dom';
 
 import { ReactComponent as OptionsIcon } from '../../assets/ellipsis-h-solid.svg';
 import potholeImg from '../../assets/pothole-img.jpg';
+import BackDrop from '../backDrop/backDrop';
+import ImageModal from '../imageModal/imageModal';
 
-const ComplainCard = ({id, small}) => {
+const ComplainCard = ({ id, small }) => {
 
     const [menuOpen, setMenuOpen] = useState(false);
 
-    const toggleMenu = (ref,event) => {
+    const toggleMenu = (ref, event) => {
         if (ref.current && ref.current.contains(event.target)) {
             setMenuOpen(!menuOpen);
         }
-        
+
     }
 
     /**
@@ -26,11 +28,11 @@ const ComplainCard = ({id, small}) => {
          */
         function handleClickOutside(event) {
 
-            if(  exceptionRef.current && exceptionRef.current.contains(event.target)){
+            if (exceptionRef.current && exceptionRef.current.contains(event.target)) {
                 return;
             }
 
-            if ( ref.current && !ref.current.contains(event.target)) {
+            if (ref.current && !ref.current.contains(event.target)) {
                 setMenuOpen(false);
             }
         }
@@ -45,46 +47,58 @@ const ComplainCard = ({id, small}) => {
         });
     }
 
+    const [modal, setModal] = useState(false);
+
     const wrapperRef = useRef(null);
     const exceptionRef = useRef(null);
     useOutsideAlerter(wrapperRef, exceptionRef);
 
     const match = useRouteMatch();
     return (
-        <div  className={`${styles['card']} ${small?styles['small']:''}`}>
-            <div  ref={exceptionRef} className={styles['options-menu']} style={{
-                display: menuOpen ? 'flex' : 'none',
-            }}>
-                <Link to={`${match.path.slice(0,-9)}complaint/:${id}`} style={{ textDecoration: 'none'}}>
-                    <span>View Details</span>
-                </Link>
-            </div>
-            <div className={styles['title']}>
-                <OptionsIcon  ref={wrapperRef} className={styles['icon']} onClick={(e) => toggleMenu(wrapperRef,e)} />
-            </div>
-            <div className={styles['body']}>
-                <img alt="pothole" src={potholeImg} />
-            </div>
-            <div className={styles['footer']}>
-                <div>
-                    <small>Date</small>
-                    <span>18 Jan 2020</span>
+        <>
+            <div className={`${styles['card']} ${small ? styles['small'] : ''}`}>
+                <div ref={exceptionRef} className={styles['options-menu']} style={{
+                    display: menuOpen ? 'flex' : 'none',
+                }}>
+                    <Link to={`${match.path.slice(0, -9)}complaint/:${id}`} style={{ textDecoration: 'none' }}>
+                        <span>View Details</span>
+                    </Link>
                 </div>
-                <div>
-                    <small>Time</small>
-                    <span> 7:30 pm</span>
+                <div className={styles['title']}>
+                    <OptionsIcon ref={wrapperRef} className={styles['icon']} onClick={(e) => toggleMenu(wrapperRef, e)} />
                 </div>
-                <div>
-                    <small>Location</small>
-                    <span>ABCD, Goa</span>
+                <div className={styles['body']} onClick={()=>{ setModal(true)}}>
+                    <img alt="pothole" src={potholeImg} />
                 </div>
-                <div>
-                    <small>Severity</small>
-                    <span>High</span>
-                </div>
+                <div className={styles['footer']}>
+                    <div>
+                        <small>Date</small>
+                        <span>18 Jan 2020</span>
+                    </div>
+                    <div>
+                        <small>Time</small>
+                        <span> 7:30 pm</span>
+                    </div>
+                    <div>
+                        <small>Location</small>
+                        <span>ABCD, Goa</span>
+                    </div>
+                    <div>
+                        <small>Severity</small>
+                        <span>High</span>
+                    </div>
 
+                </div>
             </div>
-        </div>
+            {
+                modal
+                ?(<div>
+                    <BackDrop setModal={setModal}/>
+                    <ImageModal setModal={setModal} image={potholeImg} alt={'location'} />
+                </div>)
+                :null
+            }
+        </>
     )
 }
 

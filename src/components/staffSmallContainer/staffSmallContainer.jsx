@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './smallContainerStaff.module.scss';
+import styles from './staffSmallContainer.module.scss'
 
 import ComplainCard from  '../complainCard/complainCard';
 

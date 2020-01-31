@@ -4,8 +4,9 @@ import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import Navbar from './components/navbar/navbar';
 import Login from './pages/login/login';
-import DashboardStaff from './pages/dashboardStaff/dashboardStaff';
+import DashboardStaff from './pages/staffDashboard/staffDashboard';
 import StaffComplaintDetails from './components/staffComplaintDetails/staffComplaintDetails';
+import OfficerDashboard from './pages/officerDashboard/officerDashboard';
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
          </Route>
          <Route exact path='/staff/complaint/:id'>
             <StaffComplaintDetails/>
+         </Route>
+         <Route exact path='/officer/dashboard'>
+            <OfficerDashboard/>
          </Route>
        </Switch>
 

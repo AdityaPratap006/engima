@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import styles from './dashboardStaff.module.scss';
+import styles from './staffDashboard.module.scss';
 
-import CardContainerStaff from '../../components/cardContainerStaff/cardContainerStaff';
+import StaffCardContainer from '../../components/staffCardContainer/staffCardContainer';
 import TabOption from '../../components/tabOption/tabOption';
-import SmallContainerStaff from '../../components/smallContainerStaff/smallContainerStaff';
+import SmallContainerStaff from '../../components/staffSmallContainer/staffSmallContainer';
 import StaffDataContainer from '../../components/staffDataContainer/staffDataContainer';
 import MapboxGLMap from '../../components/map/map';
 
@@ -16,10 +16,10 @@ const renderLaptopVersion = () => {
     return (
         <div className={styles['main-container']}>
             <StaffDataContainer/>
-            <CardContainerStaff title={'Pending'} />
+            <StaffCardContainer title={'Pending'} />
             <SmallContainerStaff/>
-            {/* <CardContainerStaff title={'In Progress'} />
-            <CardContainerStaff title={'Fixed'} /> */}
+            {/* <StaffCardContainer  title={'In Progress'} />
+            <StaffCardContainer  title={'Fixed'} /> */}
         </div>
     );
 }
@@ -29,10 +29,10 @@ const renderMobileVersion = (currentTab, setCurrentTab) => {
     let container = null;
 
     if(currentTab === 'pending'){
-        container = <CardContainerStaff title={'Pending'}/>;
+        container = <StaffCardContainer title={'Pending'}/>;
     }
     else if(currentTab === 'inprogress'){
-        container = <CardContainerStaff title={'In Progress'}/>;
+        container = <StaffCardContainer  title={'In Progress'}/>;
     }
     else if(currentTab === 'map'){
         container = (<div className={styles['mobile-map-container']}>

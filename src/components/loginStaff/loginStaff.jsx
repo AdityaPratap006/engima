@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import styles from './loginStaff.module.scss';
 
 import FormInput from '../formInput/formInput';
@@ -24,8 +25,12 @@ const LoginStaff = () => {
         console.log({
             userId,
             password
-        })
+        });
+
+        history.push('/staff/dashboard');
     }
+
+    const history = useHistory();
 
     return (
         <div className={styles['card']}>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './loginOfficer.module.scss';
+import { useHistory } from 'react-router-dom';
 
 import FormInput from '../formInput/formInput';
 import CustomButton from '../customButton/customButton';
@@ -7,6 +8,7 @@ import CustomButton from '../customButton/customButton';
 const LoginOfficer = () => {
     const [userId, setUserId] = useState('');
     const [password, setPassword] = useState('');
+    const history = useHistory();
 
     const handleUserIdChange = (event) => {
 
@@ -23,7 +25,10 @@ const LoginOfficer = () => {
         console.log({
             userId,
             password
-        })
+        });
+
+        
+        history.push('/officer/dashboard')
     }
 
     return (
